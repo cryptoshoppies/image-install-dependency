@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-function install_curl() {
+function execute {
     apt install curl -y
 }
 
-[[ ! $HELP ]] && install_curl $@ || echo "apt install curl"
+function help {
+    echo "apt install curl"
+}

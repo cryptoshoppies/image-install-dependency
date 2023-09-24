@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-function install_op {
+function execute {
     # ---------------------------------------------------------
     # Add the key for the 1Password apt repository:
     curl -sS https://downloads.1password.com/linux/keys/1password.asc |
@@ -29,4 +29,6 @@ function install_op {
     op --version
 }
 
-[[ ! $HELP ]] && install_op $@ || echo "install one password cli"
+function help {
+    echo "install one password cli"
+}

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-function install_sysconfig() {
+function execute {
     FILE=/etc/sysctl.conf
 
     # ---------------------------------------------------------
@@ -38,6 +38,16 @@ function install_sysconfig() {
         echo "$SEARCH is already present in $FILE."
     fi
     # ---------------------------------------------------------
+
+    # ---------------------------------------------------------
+    # apply
+    # ---------------------------------------------------------
+    sysctl -w vm.max_map_count=262144
+    sysctl -w vm.overcommit_memory=1
+
+    # ---------------------------------------------------------
 }
 
-[[ ! $HELP ]] && install_sysconfig $@ || echo "configure vm.max_map_count=262144 and vm.overcommit_memory=1"
+function help {
+    echo "set vm.max_map_count=262144 and vm.overcommit_memory=1"
+}

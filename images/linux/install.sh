@@ -19,14 +19,16 @@ argv --arch ARCH "<linux-aarch64|linux-x86_64>" $@
 # ---------------------------------------------------------
 # update
 # ---------------------------------------------------------
-apt update -y
+[[ ! $HELP ]] && apt update -y
 
 # ---------------------------------------------------------
 # install scripts
 # ---------------------------------------------------------
-$SCRIPTS/zip.sh $@
-$SCRIPTS/curl.sh $@
-$SCRIPTS/docker.sh $@
-$SCRIPTS/sysconfig.sh $@
-$SCRIPTS/op.sh $@
-$SCRIPTS/aws.sh $@
+install $SCRIPTS/zip.sh $@
+install $SCRIPTS/curl.sh $@
+install $SCRIPTS/docker.sh $@
+install $SCRIPTS/sysconfig.sh $@
+install $SCRIPTS/op.sh $@
+install $SCRIPTS/aws.sh $@
+
+echo_status

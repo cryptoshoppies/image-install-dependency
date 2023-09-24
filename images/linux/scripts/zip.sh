@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-function install_zip() {
+function execute {
     apt install zip -y
 }
 
-[[ ! $HELP ]] && install_zip $@ || echo "apt install zip"
+function help {
+    echo "apt install zip"
+}

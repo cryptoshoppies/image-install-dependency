@@ -1,6 +1,6 @@
 # config
 
-function install_docker() {
+function execute {
     # ---------------------------------------------------------
     # check arguments
     # ---------------------------------------------------------
@@ -16,10 +16,12 @@ function install_docker() {
     # install docker-plugin
     DOCKER_CONFIG=${DOCKER_CONFIG:-$HOME/.docker}
     mkdir -p $DOCKER_CONFIG/cli-plugins
-    curl -SL https://github.com/docker/compose/releases/download/v$DOCKER_COMPOSE_PLUGIN/docker-compose-$$DOCKER_ARCH -o $DOCKER_CONFIG/cli-plugins/docker-compose
+    curl -SL https://github.com/docker/compose/releases/download/v$DOCKER_COMPOSE_PLUGIN/docker-compose-$DOCKER_ARCH -o $DOCKER_CONFIG/cli-plugins/docker-compose
 
     # set
     chmod +x $DOCKER_CONFIG/cli-plugins/docker-compose
 }
 
-[[ ! $HELP ]] && install_docker $@ || echo "install docker, docker-compose, docker-compose-plugin"
+function help {
+    echo "install docker, docker-compose, docker-compose-plugin"
+}
