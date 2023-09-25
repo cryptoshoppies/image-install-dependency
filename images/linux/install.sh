@@ -26,6 +26,7 @@ argv --arch ARCH "<linux-aarch64|linux-x86_64>" $@
 # ---------------------------------------------------------
 install $SCRIPTS/zip.sh $@
 install $SCRIPTS/curl.sh $@
+install $SCRIPTS/git.sh $@
 install $SCRIPTS/docker.sh $@
 install $SCRIPTS/sysconfig.sh $@
 install $SCRIPTS/op.sh $@

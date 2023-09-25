@@ -3,7 +3,7 @@
 set -e
 apt update
 apt install zip -y
-VERSION=0.0.1
+VERSION=0.0.2
 ARCH=linux-$(uname -m)
 curl https://codeload.github.com/NeuralInnovations/runner-images/zip/refs/tags/$VERSION -o ./images.zip
 unzip -o ./images.zip -d ./
