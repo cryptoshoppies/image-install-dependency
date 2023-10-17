@@ -37,3 +37,4 @@ install $SCRIPTS/op.sh $@
 # install $SCRIPTS/aws.sh $@
 
 echo_status
+exit_status

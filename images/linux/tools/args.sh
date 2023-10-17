@@ -41,6 +41,10 @@ function echo_status {
     $IS_OK && echo_green $msg || echo_red $msg
 }
 
+function exit_status {
+    $IS_OK && exit 0 || exit 1
+}
+
 function ok {
     echo_green "OK"
 }
