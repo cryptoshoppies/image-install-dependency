@@ -6,8 +6,8 @@ VERSION=0.0.3
 # ARCH
 ARCH=linux-$(uname -m)
 
-# SOURCE_BY (tag|branch)
-SOURCE_BY=tag
+# SOURCE_BY (tags|heads)
+SOURCE_BY=tags
 
 #-------------------------------------------------------------------------------------------------------
 # PARAMETERS
@@ -22,7 +22,7 @@ while [[ "$#" -gt 0 ]]; do
         shift
         ;;
     --branch)
-        export SOURCE_BY=branch
+        export SOURCE_BY=heads
         export VERSION="$2"
         shift
         ;;
@@ -60,11 +60,7 @@ function echo_title {
     echo_blue "----------------------------------------"
 }
 #-------------------------------------------------------------------------------------------------------
-if [[ "$SOURCE_BY" == "tag" ]]; then
-    export SOURCE_URL=https://codeload.github.com/NeuralInnovations/runner-images/zip/refs/tags/$VERSION
-else
-    export SOURCE_URL=https://github.com/NeuralInnovations/runner-images/archive/refs/heads/$VERSION.zip
-fi
+export SOURCE_URL=https://codeload.github.com/NeuralInnovations/runner-images/zip/refs/$SOURCE_BY/$VERSION
 #-------------------------------------------------------------------------------------------------------
 
 echo_line
