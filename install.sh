@@ -1,16 +1,136 @@
 #!/usr/bin/env bash
 
-set -e
-apt update
-apt install zip -y
-VERSION=0.0.2
+# DEFAULTS
+
+# VERSION
+VERSION=0.0.3
+
+# ARCH
 ARCH=linux-$(uname -m)
-curl https://codeload.github.com/NeuralInnovations/runner-images/zip/refs/tags/$VERSION -o ./images.zip
-unzip -o ./images.zip -d ./
-cd ./runner-images-$VERSION
-chmod -R 777 ./images/linux/
-./images/linux/install.sh --arch $ARCH
-cd ..
-rm ./images.zip
-rm ./image-install.sh
-rm -fr ./runner-images-$VERSION
+
+# SOURCE_BY (tags|heads)
+SOURCE_BY=tags
+
+#-------------------------------------------------------------------------------------------------------
+set -e
+#-------------------------------------------------------------------------------------------------------
+# PARAMETERS
+#-------------------------------------------------------------------------------------------------------
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+    --version)
+        export VERSION="$2"
+        shift
+        ;;
+    --arch)
+        export ARCH="$2"
+        shift
+        ;;
+    --source)
+        export SOURCE_BY=$2
+        shift
+        ;;
+    --help)
+        echo "Usage: $0 --version <version> --arch <linux-aarch64|linux-x86_64> --source <tags|heads> --help"
+        exit 0
+        ;;
+    *)
+        echo "Unknown parameter: $1"
+        exit 1
+        ;;
+    esac
+    shift
+done
+
+#-------------------------------------------------------------------------------------------------------
+# FUNCTIONS
+#-------------------------------------------------------------------------------------------------------
+function echo_red {
+    echo -e "\033[0;31m$1\033[0m"
+}
+function echo_green {
+    echo -e "\033[0;32m$1\033[0m"
+}
+function echo_yellow {
+    echo -e "\033[0;33m$1\033[0m"
+}
+function echo_blue {
+    echo -e "\033[0;34m$1\033[0m"
+}
+function echo_line {
+    echo_blue "----------------------------------------"
+}
+function echo_title {
+    echo_blue "----------------------------------------"
+    echo_blue "$1"
+    echo_blue "----------------------------------------"
+}
+#-------------------------------------------------------------------------------------------------------
+
+#-------------------------------------------------------------------------------------------------------
+# VARIABLES
+#-------------------------------------------------------------------------------------------------------
+export SOURCE_URL=https://codeload.github.com/NeuralInnovations/runner-images/zip/refs/$SOURCE_BY/$VERSION
+export SOURCE_DIR=./runner-images-$(echo "$VERSION" | sed 's@/\([a-zA-Z0-9]\)@-\1@g')
+STATUS=0
+#-------------------------------------------------------------------------------------------------------
+
+#-------------------------------------------------------------------------------------------------------
+# INFO
+#-------------------------------------------------------------------------------------------------------
+echo_line
+echo_blue "VERSION=$VERSION"
+echo_blue "ARCH=$ARCH"
+echo_blue "SOURCE_BY=$SOURCE_BY"
+echo_blue "SOURCE_URL=$SOURCE_URL"
+echo_blue "SOURCE_DIR=$SOURCE_DIR"
+echo_line
+
+#-------------------------------------------------------------------------------------------------------
+# VALIDATE
+#-------------------------------------------------------------------------------------------------------
+[[ -z "$VERSION" ]] && echo_red "VERSION is empty" && exit 1
+[[ -z "$ARCH" ]] && echo_red "ARCH is empty" && exit 1
+[[ -z "$SOURCE_BY" ]] && echo_red "SOURCE_BY is empty" && exit 1
+[[ -z "$SOURCE_URL" ]] && echo_red "SOURCE_URL is empty" && exit 1
+[[ "$SOURCE_BY" != "tags" && "$SOURCE_BY" != "heads" ]] && echo_red "SOURCE_BY is invalid, valid values are --source <tags|heads>" && exit 1
+#-------------------------------------------------------------------------------------------------------
+
+#-------------------------------------------------------------------------------------------------------
+echo_title "update"
+    apt update
+#-------------------------------------------------------------------------------------------------------
+echo_title "install zip"
+    apt install zip -y
+#-------------------------------------------------------------------------------------------------------
+echo_title "download $SOURCE_URL"
+    curl -H 'Cache-Control: no-cache' "$SOURCE_URL" -o ./images.zip
+#-------------------------------------------------------------------------------------------------------
+echo_title "unzip"
+    unzip -o ./images.zip -d ./
+#-------------------------------------------------------------------------------------------------------
+echo_title "set chmod"
+    cd $SOURCE_DIR
+    chmod -R 777 ./images/linux/
+#-------------------------------------------------------------------------------------------------------
+set +e
+echo_title "install"
+    ./images/linux/install.sh --arch $ARCH && STATUS=0 || STATUS=1
+set -e
+#-------------------------------------------------------------------------------------------------------
+echo_line
+    cd ..
+#-------------------------------------------------------------------------------------------------------
+echo_title "cleanup archive"
+    rm ./images.zip
+#-------------------------------------------------------------------------------------------------------
+echo_title "cleanup script"
+    rm ./image-install.sh
+#-------------------------------------------------------------------------------------------------------
+echo_title "cleanup dir"
+    rm -fr $SOURCE_DIR
+#-------------------------------------------------------------------------------------------------------
+echo_line
+#-------------------------------------------------------------------------------------------------------
+[[ $STATUS == 0 ]] && echo_green "DONE" || echo_red "FAILED"
+#-------------------------------------------------------------------------------------------------------

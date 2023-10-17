@@ -41,6 +41,10 @@ function echo_status {
     $IS_OK && echo_green $msg || echo_red $msg
 }
 
+function exit_status {
+    $IS_OK && exit 0 || exit 1
+}
+
 function ok {
     echo_green "OK"
 }
@@ -53,13 +57,13 @@ function fail {
 #----------------------------------------------------------
 # RUN
 #----------------------------------------------------------
-function install {
+function install_script {
     echo "=========================================================="
     echo $1
     echo "----------------------------------------------------------"
-    command=$1
+    source_file=$1
     shift
-    source $command
+    source $source_file
     if [[ $HELP ]]; then
         help
     else

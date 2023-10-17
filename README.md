@@ -4,8 +4,8 @@
 requirements
 ```bash
 apt update
-apt install curl
-curl https://raw.githubusercontent.com/NeuralInnovations/runner-images/main/install.sh -o ./image-install.sh && chmod 777 ./image-install.sh && ./image-install.sh
+apt install curl -y
+curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/NeuralInnovations/runner-images/main/install.sh -o ./image-install.sh && chmod 777 ./image-install.sh && ./image-install.sh
 ```
 
 
