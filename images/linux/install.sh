@@ -32,9 +32,13 @@ install_script $SCRIPTS/curl.sh $@
 install_script $SCRIPTS/gnupg.sh $@
 install_script $SCRIPTS/git.sh $@
 install_script $SCRIPTS/docker.sh $@
+install_script $SCRIPTS/docker-compose.sh $@
 install_script $SCRIPTS/sysconfig.sh $@
 install_script $SCRIPTS/op.sh $@
 install_script $SCRIPTS/aws.sh $@
 
+# ---------------------------------------------------------
+# status
+# ---------------------------------------------------------
 echo_status
 exit_status

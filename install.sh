@@ -3,7 +3,7 @@
 # DEFAULTS
 
 # VERSION
-VERSION=0.0.3
+VERSION=0.0.4
 
 # ARCH
 ARCH=linux-$(uname -m)
