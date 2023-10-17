@@ -54,6 +54,11 @@ function echo_blue {
 function echo_line {
     echo_blue "----------------------------------------"
 }
+function echo_title {
+    echo_blue "----------------------------------------"
+    echo_blue $1
+    echo_blue "----------------------------------------"
+}
 #-------------------------------------------------------------------------------------------------------
 if [[ "$SOURCE_BY" == "tag" ]]; then
     export URL=https://codeload.github.com/NeuralInnovations/runner-images/zip/refs/tags/$VERSION
@@ -72,26 +77,26 @@ echo_line
 #-------------------------------------------------------------------------------------------------------
 set -e
 
-echo_line
+echo_title "update"
     apt update
-echo_line
+echo_title "install zip"
     apt install zip -y
-echo_line
-    curl $URL-o ./images.zip
-echo_line
+echo_title "download $URL"
+    curl $URL -o ./images.zip
+echo_title "unzip"
     unzip -o ./images.zip -d ./
-echo_line
+echo_title "set chmod"
     cd ./runner-images-$VERSION
     chmod -R 777 ./images/linux/
-echo_line
+echo_title "install"
     ./images/linux/install.sh --arch $ARCH
 echo_line
     cd ..
-echo_line
+echo_title "cleanup archive"
     rm ./images.zip
-echo_line
+echo_title "cleanup script"
     rm ./image-install.sh
-echo_line
+echo_title "cleanup dir"
     rm -fr ./runner-images-$VERSION
 echo_line
 echo_green "DONE"
