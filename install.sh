@@ -56,14 +56,14 @@ function echo_line {
 }
 function echo_title {
     echo_blue "----------------------------------------"
-    echo_blue $1
+    echo_blue "$1"
     echo_blue "----------------------------------------"
 }
 #-------------------------------------------------------------------------------------------------------
 if [[ "$SOURCE_BY" == "tag" ]]; then
-    export URL=https://codeload.github.com/NeuralInnovations/runner-images/zip/refs/tags/$VERSION
+    export SOURCE_URL=https://codeload.github.com/NeuralInnovations/runner-images/zip/refs/tags/$VERSION
 else
-    export URL=https://github.com/NeuralInnovations/runner-images/archive/refs/heads/$VERSION.zip
+    export SOURCE_URL=https://github.com/NeuralInnovations/runner-images/archive/refs/heads/$VERSION.zip
 fi
 #-------------------------------------------------------------------------------------------------------
 
@@ -71,7 +71,7 @@ echo_line
 echo_blue "VERSION=$VERSION"
 echo_blue "ARCH=$ARCH"
 echo_blue "SOURCE_BY=$SOURCE_BY"
-echo_blue "URL=$URL"
+echo_blue "SOURCE_URL=$SOURCE_URL"
 echo_line
 
 #-------------------------------------------------------------------------------------------------------
@@ -81,8 +81,8 @@ echo_title "update"
     apt update
 echo_title "install zip"
     apt install zip -y
-echo_title "download $URL"
-    curl -H 'Cache-Control: no-cache' "$URL" -o ./images.zip
+echo_title "download $SOURCE_URL"
+    curl -H 'Cache-Control: no-cache' "$SOURCE_URL" -o ./images.zip
 echo_title "unzip"
     unzip -o ./images.zip -d ./
 echo_title "set chmod"
