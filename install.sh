@@ -6,8 +6,8 @@ VERSION=0.0.3
 # ARCH
 ARCH=linux-$(uname -m)
 
-# tag or branch
-USE_TAG=true
+# SOURCE_BY (tag|branch)
+SOURCE_BY=tag
 
 #-------------------------------------------------------------------------------------------------------
 # PARAMETERS
@@ -24,7 +24,7 @@ while [[ "$#" -gt 0 ]]; do
         shift
         ;;
     --branch)
-        export USE_TAG=false
+        export SOURCE_BY=branch
         export VERSION="$2"
         echo "VERSION=$VERSION"
         [[ $USE_TAG ]] && echo "use tag" || echo "use branch"
@@ -44,16 +44,18 @@ done
 
 #-------------------------------------------------------------------------------------------------------
 
+echo "----------------------------------------"
 echo "VERSION=$VERSION"
 echo "ARCH=$ARCH"
-[[ $USE_TAG ]] && echo "SOURCE=tag" || echo "SOURCE=branch"
+echo "SOURCE_BY=$SOURCE_BY"
+echo "----------------------------------------"
 
 #-------------------------------------------------------------------------------------------------------
 set -e
 apt update
 apt install zip -y
 
-if [[ $USE_TAG ]]; then
+if [[ "$SOURCE_BY" == "tag" ]]; then
     curl https://codeload.github.com/NeuralInnovations/runner-images/zip/refs/tags/$VERSION -o ./images.zip
 else
     curl https://github.com/NeuralInnovations/runner-images/archive/refs/heads/$VERSION.zip -o ./images.zip
