@@ -55,11 +55,18 @@ function echo_line {
     echo_blue "----------------------------------------"
 }
 #-------------------------------------------------------------------------------------------------------
+if [[ "$SOURCE_BY" == "tag" ]]; then
+    export URL=https://codeload.github.com/NeuralInnovations/runner-images/zip/refs/tags/$VERSION
+else
+    export URL=https://github.com/NeuralInnovations/runner-images/archive/refs/heads/$VERSION.zip
+fi
+#-------------------------------------------------------------------------------------------------------
 
 echo_line
 echo_blue "VERSION=$VERSION"
 echo_blue "ARCH=$ARCH"
 echo_blue "SOURCE_BY=$SOURCE_BY"
+echo_blue "URL=$URL"
 echo_line
 
 #-------------------------------------------------------------------------------------------------------
@@ -70,22 +77,16 @@ echo_line
 echo_line
     apt install zip -y
 echo_line
-
-if [[ "$SOURCE_BY" == "tag" ]]; then
-    curl https://codeload.github.com/NeuralInnovations/runner-images/zip/refs/tags/$VERSION -o ./images.zip
-else
-    curl https://github.com/NeuralInnovations/runner-images/archive/refs/heads/$VERSION.zip -o ./images.zip
-fi
-
+    curl $URL-o ./images.zip
 echo_line
     unzip -o ./images.zip -d ./
 echo_line
-cd ./runner-images-$VERSION
-chmod -R 777 ./images/linux/
+    cd ./runner-images-$VERSION
+    chmod -R 777 ./images/linux/
 echo_line
     ./images/linux/install.sh --arch $ARCH
 echo_line
-cd ..
+    cd ..
 echo_line
     rm ./images.zip
 echo_line
