@@ -57,9 +57,9 @@ function install {
     echo "=========================================================="
     echo $1
     echo "----------------------------------------------------------"
-    command=$1
+    source_file=$1
     shift
-    source $command
+    source $source_file
     if [[ $HELP ]]; then
         help
     else

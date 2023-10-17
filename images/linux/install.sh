@@ -25,7 +25,11 @@ argv --arch ARCH "<linux-aarch64|linux-x86_64>" $@
 # install scripts
 # ---------------------------------------------------------
 install $SCRIPTS/zip.sh $@
+install $SCRIPTS/apt-transport-https.sh $@
+install $SCRIPTS/ca-certificates.sh $@
+install $SCRIPTS/software-properties-common.sh $@
 install $SCRIPTS/curl.sh $@
+install $SCRIPTS/gnupg.sh $@
 install $SCRIPTS/git.sh $@
 install $SCRIPTS/docker.sh $@
 install $SCRIPTS/sysconfig.sh $@
