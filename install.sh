@@ -15,19 +15,15 @@ while [[ "$#" -gt 0 ]]; do
     case $1 in
     --version)
         export VERSION="$2"
-        echo "VERSION=$VERSION"
         shift
         ;;
     --arch)
         export ARCH="$2"
-        echo "ARCH=$ARCH"
         shift
         ;;
     --branch)
         export SOURCE_BY=branch
         export VERSION="$2"
-        echo "VERSION=$VERSION"
-        [[ $USE_TAG ]] && echo "use tag" || echo "use branch"
         shift
         ;;
     --help)
