@@ -82,7 +82,7 @@ echo_title "update"
 echo_title "install zip"
     apt install zip -y
 echo_title "download $URL"
-    curl $URL -o ./images.zip
+    curl -H 'Cache-Control: no-cache' $URL -o ./images.zip
 echo_title "unzip"
     unzip -o ./images.zip -d ./
 echo_title "set chmod"
