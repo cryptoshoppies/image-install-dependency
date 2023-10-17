@@ -34,6 +34,6 @@ install $SCRIPTS/git.sh $@
 install $SCRIPTS/docker.sh $@
 install $SCRIPTS/sysconfig.sh $@
 install $SCRIPTS/op.sh $@
-install $SCRIPTS/aws.sh $@
+# install $SCRIPTS/aws.sh $@
 
 echo_status
