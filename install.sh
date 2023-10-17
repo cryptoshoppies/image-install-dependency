@@ -71,7 +71,7 @@ function echo_title {
 # VARIABLES
 #-------------------------------------------------------------------------------------------------------
 export SOURCE_URL=https://codeload.github.com/NeuralInnovations/runner-images/zip/refs/$SOURCE_BY/$VERSION
-export SOURCE_DIR=./$(echo "runner-images-${VERSION}" | sed 's@/\([a-zA-Z0-9]\)@-\1@g')
+export SOURCE_DIR=./runner-images-$(echo "$VERSION" | sed 's@/\([a-zA-Z0-9]\)@-\1@g')
 #-------------------------------------------------------------------------------------------------------
 
 #-------------------------------------------------------------------------------------------------------
