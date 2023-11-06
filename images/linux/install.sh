@@ -26,6 +26,7 @@ argv --arch ARCH "<linux-aarch64|linux-x86_64>" $@
 # ---------------------------------------------------------
 install_script $SCRIPTS/zip.sh $@
 install_script $SCRIPTS/apt-transport-https.sh $@
+install_script $SCRIPTS/apache2-utils.sh $@
 install_script $SCRIPTS/ca-certificates.sh $@
 install_script $SCRIPTS/software-properties-common.sh $@
 install_script $SCRIPTS/curl.sh $@
