@@ -30,6 +30,7 @@ install_script $SCRIPTS/apache2-utils.sh $@
 install_script $SCRIPTS/ca-certificates.sh $@
 install_script $SCRIPTS/software-properties-common.sh $@
 install_script $SCRIPTS/curl.sh $@
+install_script $SCRIPTS/jq.sh $@
 install_script $SCRIPTS/gnupg.sh $@
 install_script $SCRIPTS/git.sh $@
 install_script $SCRIPTS/docker.sh $@
