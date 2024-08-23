@@ -2,12 +2,37 @@
 
 #### Just copy and past
 requirements
+
+update
 ```bash
 apt update
+```
+```bash
+apt install software-properties-common --yes
+```
+install curl
+```bash
 apt install curl -y
+```
+install requirements
+```bash
 curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/NeuralInnovations/runner-images/main/install.sh -o ./image-install.sh && chmod 777 ./image-install.sh && ./image-install.sh
 ```
 
+---
+
+use with sudo
+```bash
+sudo apt update
+sudo apt install software-properties-common --yes
+sudo apt install curl -y
+
+sudo curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/NeuralInnovations/runner-images/main/install.sh -o ./image-install.sh 
+sudo chmod 777 ./image-install.sh 
+sudo ./image-install.sh
+
+sudo usermod -aG docker $USER
+```
 
 
 --- 
