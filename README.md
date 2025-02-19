@@ -16,7 +16,7 @@ apt install curl -y
 ```
 install requirements
 ```bash
-curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/NeuralInnovations/runner-images/main/install.sh -o ./image-install.sh && chmod 777 ./image-install.sh && ./image-install.sh
+curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/NeuralInnovations/runner-images/main/install.sh | bash
 ```
 
 ---

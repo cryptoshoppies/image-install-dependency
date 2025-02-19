@@ -3,7 +3,7 @@
 # DEFAULTS
 
 # VERSION
-VERSION=0.0.6
+VERSION=0.0.7
 
 # ARCH
 ARCH=linux-$(uname -m)
@@ -124,8 +124,6 @@ echo_line
 echo_title "cleanup archive"
     rm ./images.zip
 #-------------------------------------------------------------------------------------------------------
-echo_title "cleanup script"
-    rm ./image-install.sh
 #-------------------------------------------------------------------------------------------------------
 echo_title "cleanup dir"
     rm -fr $SOURCE_DIR
