@@ -1,4 +1,6 @@
-# runner-images
+# image-install-dependency
+
+Forked from https://github.com/NeuralInnovations/runner-images
 
 #### Just copy and past
 requirements
@@ -16,7 +18,7 @@ apt install curl -y
 ```
 install requirements
 ```bash
-curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/NeuralInnovations/runner-images/main/install.sh | bash
+curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/cryptoshoppies/image-install-dependency/main/install.sh | bash
 ```
 
 ---
@@ -27,7 +29,7 @@ sudo apt update
 sudo apt install software-properties-common --yes
 sudo apt install curl -y
 
-sudo curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/NeuralInnovations/runner-images/main/install.sh -o ./image-install.sh 
+sudo curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/cryptoshoppies/image-install-dependency/main/install.sh -o ./image-install.sh 
 sudo chmod 777 ./image-install.sh 
 sudo ./image-install.sh
 

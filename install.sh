@@ -3,7 +3,7 @@
 # DEFAULTS
 
 # VERSION
-VERSION=0.0.7
+VERSION=0.1.0
 
 # ARCH
 ARCH=linux-$(uname -m)
@@ -70,8 +70,8 @@ function echo_title {
 #-------------------------------------------------------------------------------------------------------
 # VARIABLES
 #-------------------------------------------------------------------------------------------------------
-export SOURCE_URL=https://codeload.github.com/NeuralInnovations/runner-images/zip/refs/$SOURCE_BY/$VERSION
-export SOURCE_DIR=./runner-images-$(echo "$VERSION" | sed 's@/\([a-zA-Z0-9]\)@-\1@g')
+export SOURCE_URL=https://codeload.github.com/cryptoshoppies/image-install-dependency/zip/refs/$SOURCE_BY/$VERSION
+export SOURCE_DIR=./image-install-dependency-$(echo "$VERSION" | sed 's@/\([a-zA-Z0-9]\)@-\1@g')
 STATUS=0
 #-------------------------------------------------------------------------------------------------------
 
